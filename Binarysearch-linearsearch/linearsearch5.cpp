@@ -1,7 +1,7 @@
 #include <iostream>
 #include <climits> 
 using namespace std;
-#define maxn 10000
+#define maxn 100000
 
 void nhap(int arr[], int n) {
     for (int i = 0; i < n; i++) {
@@ -43,10 +43,10 @@ void trongso(int arr[], int n) {
 
 int main() {
     int test;
+    int n;
+    int arr[maxn];
     cin >> test;
     while (test--) {
-        int arr[maxn];
-        int n;
         cin >> n;
         nhap(arr, n);
         trongso(arr, n);
