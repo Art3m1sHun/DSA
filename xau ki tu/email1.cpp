@@ -2,15 +2,9 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#define gmail "@gmail.com"
+
 using namespace std;
-
-char toupper(char ch) {
-    if (ch >= 'a' && ch <= 'z') {
-        return ch + 'A' - 'a';  
-    }
-    return ch;
-}
-
 
 char tolower(char ch) {
     if (ch >= 'A' && ch <= 'Z') {
@@ -23,7 +17,10 @@ void chuanhoa(string &word){
     for (int i = 0; i < word.length(); i++){
         word[i] = tolower(word[i]);
     }
-    word[0] = toupper(word[0]);
+}
+
+char laychucaidau(string word){
+    return word[0];
 }
 
 int main(){
@@ -40,18 +37,14 @@ int main(){
     if (!words.empty()) {
         cout << words.back();  // In tên cuối cùng
         words.pop_back();  // Xóa tên cuối cùng khỏi danh sách
-
         if (!words.empty()) {
-            cout << ", ";  // Thêm dấu phẩy ngăn cách
             for (int i = 0; i < words.size(); i++) {
-                cout << words[i];  // In các từ còn lại
-                if (i != words.size() - 1) {
-                    cout << " ";  // Thêm khoảng trắng giữa các từ
+                cout << laychucaidau(words[i]);  // In các từ còn lại
                 }
+                cout << gmail;
             }
         }
         cout << endl;  
     }
-}
     return 0;
 }

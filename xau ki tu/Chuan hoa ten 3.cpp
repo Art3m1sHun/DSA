@@ -26,6 +26,13 @@ void chuanhoa(string &word){
     word[0] = toupper(word[0]);
 }
 
+string chuanhoa1(string word) {
+    for (int i = 0; i < word.length(); i++) {
+        word[i] = toupper(word[i]);
+    }
+    return word;
+}
+
 int main(){
     while(1){
     string s;
@@ -38,7 +45,7 @@ int main(){
         words.push_back(word); // Thêm vào danh sách từ
     }
     if (!words.empty()) {
-        cout << words.back();  // In tên cuối cùng
+        cout << chuanhoa1(words.back());  // In tên cuối cùng
         words.pop_back();  // Xóa tên cuối cùng khỏi danh sách
 
         if (!words.empty()) {
