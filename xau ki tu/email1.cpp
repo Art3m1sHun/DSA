@@ -24,7 +24,6 @@ char laychucaidau(string word){
 }
 
 int main(){
-    while(1){
     string s;
     getline(cin, s);
     stringstream ss (s);
@@ -45,6 +44,5 @@ int main(){
             }
         }
         cout << endl;  
-    }
     return 0;
 }
