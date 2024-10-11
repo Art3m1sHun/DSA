@@ -1,62 +1,68 @@
 #include <iostream>
 #include <vector>
+
 using namespace std;
 
+void print_array(vector<int>& arr, int left, int right) {
+    for (int i = 0; i < arr.size(); i++) {
+        if (i == left) {
+            cout << "[ ";
+        }
+        cout << arr[i] << " ";
+        if (i == right) {
+            cout << "] ";
+        }
+    }
+    cout << endl;
+}
+
 void merge(vector<int>& arr, int left, int mid, int right) {
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
-
-    vector<int> leftArr(n1), rightArr(n2);
-
-    for (int i = 0; i < n1; i++)
-        leftArr[i] = arr[left + i];
-    for (int j = 0; j < n2; j++)
-        rightArr[j] = arr[mid + 1 + j];
-
-    int i = 0, j = 0, k = left;
-
-    while (i < n1 && j < n2) {
-        if (leftArr[i] <= rightArr[j]) {
-            arr[k] = leftArr[i];
+    vector<int> left_sub(arr.begin() + left, arr.begin() + mid + 1);
+    vector<int> right_sub(arr.begin() + mid + 1, arr.begin() + right + 1);
+    int i = 0;
+    int j = 0;
+    int k = left;
+    while (i < left_sub.size() && j < right_sub.size()) {
+        if (left_sub[i] <= right_sub[j]) {
+            arr[k] = left_sub[i];
             i++;
         } else {
-            arr[k] = rightArr[j];
+            arr[k] = right_sub[j];
             j++;
         }
         k++;
     }
-    while (i < n1) {
-        arr[k] = leftArr[i];/
+    while (i < left_sub.size()) {
+        arr[k] = left_sub[i];
         i++;
         k++;
     }
-    while (j < n2) {
-        arr[k] = rightArr[j];
+    while (j < right_sub.size()) {
+        arr[k] = right_sub[j];
         j++;
         k++;
     }
+    print_array(arr, left, right);
 }
 
-void mergeSort(vector<int>& arr, int left, int right) {
+
+void merge_sort(vector<int>& arr, int left, int right) {
     if (left < right) {
-        int mid = left + (right - left) / 2;
-        mergeSort(arr, left, mid);
-        mergeSort(arr, mid + 1, right);
-        merge(arr, left, mid, right); 
+        int mid = (left + right) / 2;
+        merge_sort(arr, left, mid);
+        merge_sort(arr, mid + 1, right);
+        merge(arr, left, mid, right);
     }
 }
 
+
 int main() {
-    while(1){
-    int n;
-    cin >> n;
-
-    vector<int> arr(n);
-    for (int i = 0; i < n; i++)
-        cin >> arr[i];
-
-    mergeSort(arr, 0, n - 1);
-
-}
+    int N;
+    cin >> N;
+    vector<int> A(N);
+    for (int i = 0; i < N; i++) {
+        cin >> A[i];
+    }
+    merge_sort(A, 0, N - 1);
     return 0;
 }
