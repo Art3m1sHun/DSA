@@ -76,7 +76,13 @@
         "xutility": "cpp",
         "random": "cpp",
         "deque": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "cwctype": "cpp",
+        "map": "cpp",
+        "set": "cpp",
+        "memory_resource": "cpp",
+        "numeric": "cpp",
+        "numbers": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
