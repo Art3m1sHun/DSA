@@ -49,26 +49,16 @@ class SinglyLinkedList {
 
 //###INSERT CODE HERE -
 void insert_node(SinglyLinkedList *list, int value) {
-    SinglyLinkedListNode* newNode = new SinglyLinkedListNode(value);
-    if (list->head == nullptr || list->head->data >= value) {
-        newNode->next = list->head;
-        list->head = newNode;
-        if (list->tail == nullptr) {
-            list->tail = newNode;  
-        }
-        return;
-    }
-    SinglyLinkedListNode* current = list->head;
-    while (current->next != nullptr && current->next->data < value) {
-        current = current->next;
-    }
+    SinglyLinkedListNode* tmp = new SinglyLinkedListNode(value);
+    tmp->data = value;      
+    tmp->next = NULL;       
 
-    newNode->next = current->next;
-    current->next = newNode;
-
-    if (newNode->next == nullptr) {
-        list->tail = newNode; 
-    }
+    if(list->head == NULL) { 
+        list->head = tmp;
+        list->tail = tmp;
+    } else { 
+        list->tail->next = tmp; 
+        list->tail = tmp;       
 }
 
 // Print linked list
@@ -95,6 +85,7 @@ void reverseLinkedList(SinglyLinkedList *list) {
 }
 int main()
 {
+    while(1){
     SinglyLinkedList* llist = new SinglyLinkedList();
     int llist_count;
 
@@ -103,6 +94,7 @@ int main()
 
     for (int i = 0; i < llist_count; i++) {
         int llist_item;
+        cout <<"Nhap gia tri o so " << i << endl;
         cin >> llist_item;
 
         insert_node(llist,llist_item);
@@ -111,5 +103,6 @@ int main()
     
     reverseLinkedList(llist);
     printLinkedList(llist);
+    }
     return 0;
 }

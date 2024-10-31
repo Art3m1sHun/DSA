@@ -73,28 +73,26 @@ SinglyLinkedListNode* mergeLists(SinglyLinkedListNode* head_list1,SinglyLinkedLi
 
 //###INSERT CODE HERE -
  SinglyLinkedListNode dummy(0);
-        SinglyLinkedListNode* tail = &dummy;  // Tail pointer to build the new list
+        SinglyLinkedListNode* tail = &dummy;  
 
-        // Traverse both lists and merge them
         while (head_list1 != NULL && head_list2 != NULL) {
             if (head_list1->data < head_list2->data) {
-                tail->next = head_list1;  // Append head1 to the merged list
-                head_list1 = head_list1->next;  // Move to the next node in head1
+                tail->next = head_list1;  
+                head_list1 = head_list1->next; 
             } else {
-                tail->next = head_list2;  // Append head2 to the merged list
-                head_list2 = head_list2->next;  // Move to the next node in head2
+                tail->next = head_list2; 
+                head_list2 = head_list2->next; 
             }
-            tail = tail->next;  // Move the tail pointer
+            tail = tail->next; 
         }
 
-        // Append any remaining nodes from head1 or head2
         if (head_list1 != NULL) {
             tail->next = head_list1;
         } else {
             tail->next = head_list2;
         }
 
-        return dummy.next;  // Return the head of the merged list
+        return dummy.next;  
 }
 
 
