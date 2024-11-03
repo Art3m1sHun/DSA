@@ -72,13 +72,21 @@ void Xuat(const DATHUC& C) {
         if (p->data->heso != 0) { 
             if (!first_term) {
                 cout << (p->data->heso > 0 ? "+" : "-");
-				if(abs(p->data->heso == 1)){
-
-				}else{
-                cout << abs(p->data->heso);
-				}
+                if(abs(p->data->heso) == 1){
+                    if(p->data->somu == 0){
+                        cout << abs(p->data->heso);
+                    }
+                }else{
+                    cout << abs(p->data->heso);
+                }
             } else {
-                cout << p->data->heso;
+                if(abs(p->data->heso) == 1){
+                    if(p->data->somu == 0){
+                        cout << abs(p->data->heso);
+                    }
+                }else{
+                    cout << p->data->heso;
+                }
                 first_term = false;
             }
             if (p->data->somu > 0) {
@@ -87,6 +95,9 @@ void Xuat(const DATHUC& C) {
             }
         }
         p = p->next;
+    }
+    if(first_term){
+        cout << 0;
     }
     cout << endl;
 }
