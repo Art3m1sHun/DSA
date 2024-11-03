@@ -59,8 +59,8 @@ void insert_node(SinglyLinkedList *list, int value) {
     } else { 
         list->tail->next = tmp; 
         list->tail = tmp;       
+    }
 }
-
 // Print linked list
 void printLinkedList(SinglyLinkedList *list){
     SinglyLinkedListNode* current = list->head;

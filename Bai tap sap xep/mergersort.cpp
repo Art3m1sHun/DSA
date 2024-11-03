@@ -64,5 +64,6 @@ int main() {
         cin >> A[i];
     }
     merge_sort(A, 0, N - 1);
+    system("pause");
     return 0;
 }
