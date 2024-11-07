@@ -46,13 +46,17 @@ struct DATHUC{
 //###INSERT CODE HERE -
 double TinhDaThuc(const DATHUC& A, double x) {
     double tong = 0;
-    for (Node* p = A.head; p != nullptr; p = p->next) {
-        tong += p->data->heso * pow(x, p->data->somu);
+    for (const Node* p = A.head; p != nullptr; p = p->next) {
+        if (p->data->somu == 0) {
+            tong += p->data->heso;
+        } else {
+            tong += p->data->heso * pow(x, p->data->somu);
+        }
     }
     return tong;
 }
-
 void Nhap(DATHUC &B, double heso, int somu) {
+    if (heso == 0) return;
     DONTHUC* tmpData = new DONTHUC(heso, somu); 
     Node* tmp = new Node(tmpData);
 
@@ -64,7 +68,6 @@ void Nhap(DATHUC &B, double heso, int somu) {
         B.tail = tmp;
     }
 }
-
 void Xuat(const DATHUC& C) {
     Node* p = C.head;
     bool first_term = true; 
@@ -80,12 +83,18 @@ void Xuat(const DATHUC& C) {
                     cout << abs(p->data->heso);
                 }
             } else {
-                if(abs(p->data->heso) == 1){
+                if((p->data->heso) == -1){
+                        if(p->data->somu > 0){
+                            cout << "-";
+                            }
+                }else{
+                    if(abs(p->data->heso) == 1){
                     if(p->data->somu == 0){
                         cout << abs(p->data->heso);
                     }
-                }else{
-                    cout << p->data->heso;
+                    }else{
+                        cout << p->data->heso;
+                    }
                 }
                 first_term = false;
             }
