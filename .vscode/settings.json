@@ -83,7 +83,9 @@
         "memory_resource": "cpp",
         "numeric": "cpp",
         "numbers": "cpp",
-        "source_location": "cpp"
+        "source_location": "cpp",
+        "chrono": "cpp",
+        "list": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
