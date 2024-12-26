@@ -1,42 +1,111 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
-int binarySearch(const vector<int>& arr, int value) {
-    auto it = lower_bound(arr.begin(), arr.end(), value);
-    if (it != arr.end() && *it == value) {
-        return it - arr.begin() + 1;
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+    int count;
+
+    Node(int val) : data(val), left(nullptr), right(nullptr), count(1) {}
+};
+
+Node* insert(Node* root, int val) {
+    if (root == nullptr) {
+        return new Node(val);
     }
-    return 0;
+
+    if (val < root->data) {
+        root->left = insert(root->left, val);
+    } else if (val > root->data) {
+        root->right = insert(root->right, val);
+    } 
+
+    // Cập nhật count sau khi chèn
+    root->count = 1;
+    if (root->left) root->count += root->left->count;
+    if (root->right) root->count += root->right->count;
+    return root;
 }
 
-void insertionSort(vector<int>& a) {
-    for (int i = 1; i < a.size(); i++) {
-        int pos = i - 1, x = a[i];
-        while (pos >= 0 && a[pos] > x) {
-            a[pos + 1] = a[pos];
-            --pos;
+Node* remove(Node* root, int val) {
+    if (root == nullptr) return root;
+
+    if (val < root->data)
+        root->left = remove(root->left, val);
+    else if (val > root->data)
+        root->right = remove(root->right, val);
+    else {
+        if (root->left == nullptr) {
+            Node* temp = root->right;
+            delete root;
+            return temp;
+        } else if (root->right == nullptr) {
+            Node* temp = root->left;
+            delete root;
+            return temp;
         }
-        a[pos + 1] = x;
+
+        Node* temp = root->right;
+        while (temp->left != nullptr)
+            temp = temp->left;
+
+        root->data = temp->data;
+        root->right = remove(root->right, temp->data);
     }
+    if(root){
+        root->count = 1;
+        if (root->left) root->count += root->left->count;
+        if (root->right) root->count += root->right->count;
+    }
+    return root;
+}
+
+int countLessThan(Node* root, int val) {
+    if (root == nullptr) {
+        return 0;
+    }
+
+    if (val <= root->data) {
+        return countLessThan(root->left, val);
+    } else {
+        int count = 1; 
+        if(root->left) count += root->left->count;
+        return count + countLessThan(root->right, val);
+    }
+}
+
+bool find(Node* root, int val){
+    if(root == nullptr) return false;
+    if(root->data == val) return true;
+    if(val < root->data) return find(root->left, val);
+    return find(root->right, val);
 }
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
+    Node* root = nullptr;
     int a, b;
-    vector<int> arr;
-    while (true) {
-        cin >> a >> b;
+
+    while (cin >> a) {
+        if (a == 0) break;
+        cin >> b;
+
         if (a == 1) {
-            arr.push_back(b);
-            insertionSort(arr);
+            root = insert(root, b);
+        } else if (a == 3) {
+            root = remove(root, b);
         } else if (a == 2) {
-            int pos = binarySearch(arr, b);
-            cout << pos << endl;
-        }else return false;
+            if (find(root, b)) {
+                cout << countLessThan(root, b) + 1 << "\n";
+            } else {
+                cout << 0 << "\n";
+            }
+        }
     }
     return 0;
 }
