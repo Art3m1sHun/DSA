@@ -24,7 +24,6 @@ Node* insert(Node* root, int val) {
         root->right = insert(root->right, val);
     } 
 
-    // Cập nhật count sau khi chèn
     root->count = 1;
     if (root->left) root->count += root->left->count;
     if (root->right) root->count += root->right->count;
