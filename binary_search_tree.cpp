@@ -70,14 +70,17 @@ public:
     }
 
     void replaceNode(Node*& tree, Node*& tree1) {
-        if (tree1->left != nullptr) {
-            replaceNode(tree, tree1->left);
-        } else if (tree1->right != nullptr) {
-            tree->data = tree1->data;
-            tree = tree1;
-            tree1 = tree1->right;
-        }
+    if (tree1->left != nullptr) {
+        replaceNode(tree, tree1->left);
+    } else if (tree1->right != nullptr) {
+        tree->data = tree1->data;
+        tree->left = tree1->left;
+        tree->right = tree1->right;
+        tree1 = tree1->right;
+    } else {
+        tree = nullptr;
     }
+}
 
     void deleteNode(Node*& tree, char data) {
         if (tree == nullptr) {
