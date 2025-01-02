@@ -120,7 +120,7 @@ public:
 	}
     void deleteAtLast(){
         if(head == NULL){
-            cout << "List is empty" << endl;
+            return;
         }else if(head->next == NULL){
             delete head;
             head = NULL;
