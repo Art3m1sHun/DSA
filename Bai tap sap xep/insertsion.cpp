@@ -7,15 +7,8 @@ void insertsionsort(int a[], int n){
         while(pos >= 0 && a[pos] > x){
             a[pos + 1] = a[pos];
             --pos;
-             for (int j = 0; j < n; j++){
-            cout << a[j] << " ";
-        }
         }
         a[pos + 1] = x;
-        for (int j = 0; j < n; j++){
-            cout << a[j] << " ";
-        }
-        cout << endl;
     }
 }
 

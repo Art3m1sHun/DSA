@@ -18,7 +18,6 @@ void selectionsort(int arr[], int n) {
         }
         if (min_pos != i) {
             swap(arr[min_pos], arr[i]);
-            printArray(arr, n);
         }
     }
 }
